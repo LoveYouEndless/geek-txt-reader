@@ -90,7 +90,6 @@ class GeekReaderApp {
         this.currentFilePath = '';
 
         this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
-        // 【关键改动 1】：移除 statusBarItem.command，点击底部不产生误动作
         this.statusBarItem.command = undefined;
         this.context.subscriptions.push(this.statusBarItem);
 
@@ -106,7 +105,7 @@ class GeekReaderApp {
     }
 
     reloadConfig() {
-        const config = vscode.workspace.getConfiguration('geekReader');
+        const config = vscode.workspace.getConfiguration('geekTxtReader');
         this.showTitle = config.get('showTitle', false);
         this.displayLength = config.get('displayLength', 35);
         this.stepLength = config.get('stepLength', 28);
@@ -116,7 +115,7 @@ class GeekReaderApp {
     registerListeners() {
         this.context.subscriptions.push(
             vscode.workspace.onDidChangeConfiguration(e => {
-                if (e.affectsConfiguration('geekReader')) {
+                if (e.affectsConfiguration('geekTxtReader')) {
                     this.reloadConfig();
                     this.render();
                 }
@@ -166,14 +165,12 @@ class GeekReaderApp {
         }
     }
 
-    // 章节快速跳转（支持搜索章节名、序号或字数偏移）
     async jumpTo() {
         if (!this.chapters.length) {
             vscode.window.showInformationMessage('请先加载文件');
             return;
         }
 
-        // 构建快速选择列表
         const items = this.chapters.map((ch, idx) => {
             const title = this.formatChapterTitle(idx, ch.rawTitle);
             const isCurrent = idx === this.currentChapterIndex;
@@ -240,15 +237,15 @@ class GeekReaderApp {
     }
 
     saveState() {
-        this.context.globalState.update('geek_last_file', this.currentFilePath);
-        this.context.globalState.update('geek_last_chapter', this.currentChapterIndex);
-        this.context.globalState.update('geek_last_offset', this.currentOffset);
+        this.context.globalState.update('geek_txt_last_file', this.currentFilePath);
+        this.context.globalState.update('geek_txt_last_chapter', this.currentChapterIndex);
+        this.context.globalState.update('geek_txt_last_offset', this.currentOffset);
     }
 
     async restoreState() {
-        const lastFile = this.context.globalState.get('geek_last_file');
-        const lastChapter = this.context.globalState.get('geek_last_chapter', 0);
-        const lastOffset = this.context.globalState.get('geek_last_offset', 0);
+        const lastFile = this.context.globalState.get('geek_txt_last_file');
+        const lastChapter = this.context.globalState.get('geek_txt_last_chapter', 0);
+        const lastOffset = this.context.globalState.get('geek_txt_last_offset', 0);
 
         if (lastFile && fs.existsSync(lastFile)) {
             try {
@@ -275,7 +272,7 @@ class GeekReaderApp {
             this.statusBarItem.text = "geek: 等待加载文件 📖";
             const emptyTooltip = new vscode.MarkdownString();
             emptyTooltip.isTrusted = true;
-            emptyTooltip.appendMarkdown(`👉 **[点击可切换/重新打开本地文件](command:geek-reader.openFile)**`);
+            emptyTooltip.appendMarkdown(`👉 **[点击可切换/重新打开本地文件](command:geek-txt-reader.openFile)**`);
             this.statusBarItem.tooltip = emptyTooltip;
             return;
         }
@@ -298,16 +295,15 @@ class GeekReaderApp {
             this.statusBarItem.text = `[${order}] [${this.currentOffset}/${total}] ${textSlice}`;
         }
 
-        // 【关键改动 2 & 3】：更新悬浮 Markdown 卡片
         const tooltip = new vscode.MarkdownString();
         tooltip.isTrusted = true;
         tooltip.appendMarkdown(`### 📖 ${formattedTitle}\n\n`);
         tooltip.appendMarkdown(`- **字数进度**：\`${this.currentOffset} / ${total}\` 字\n`);
         tooltip.appendMarkdown(`- **翻页快捷键**：\`Alt + Left/Right\`\n`);
-        tooltip.appendMarkdown(`- **快速跳转章节**：\`Alt + J\` 或 **[点击跳转章节](command:geek-reader.jumpTo)**\n`);
+        tooltip.appendMarkdown(`- **快速跳转章节**：\`Alt + J\` 或 **[点击跳转章节](command:geek-txt-reader.jumpTo)**\n`);
         tooltip.appendMarkdown(`- **老板键**：\`Alt + Q\`\n\n`);
         tooltip.appendMarkdown(`---\n\n`);
-        tooltip.appendMarkdown(`👉 **[点击可切换/重新打开本地文件](command:geek-reader.openFile)**`);
+        tooltip.appendMarkdown(`👉 **[点击可切换/重新打开本地文件](command:geek-txt-reader.openFile)**`);
 
         this.statusBarItem.tooltip = tooltip;
     }
@@ -317,11 +313,11 @@ function activate(context) {
     const app = new GeekReaderApp(context);
 
     context.subscriptions.push(
-        vscode.commands.registerCommand('geek-reader.openFile', () => app.openFile()),
-        vscode.commands.registerCommand('geek-reader.pageBackward', () => app.pageBackward()),
-        vscode.commands.registerCommand('geek-reader.pageForward', () => app.pageForward()),
-        vscode.commands.registerCommand('geek-reader.toggleBossKey', () => app.toggleBossKey()),
-        vscode.commands.registerCommand('geek-reader.jumpTo', () => app.jumpTo())
+        vscode.commands.registerCommand('geek-txt-reader.openFile', () => app.openFile()),
+        vscode.commands.registerCommand('geek-txt-reader.pageBackward', () => app.pageBackward()),
+        vscode.commands.registerCommand('geek-txt-reader.pageForward', () => app.pageForward()),
+        vscode.commands.registerCommand('geek-txt-reader.toggleBossKey', () => app.toggleBossKey()),
+        vscode.commands.registerCommand('geek-txt-reader.jumpTo', () => app.jumpTo())
     );
 }
 

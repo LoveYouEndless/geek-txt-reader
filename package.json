@@ -2,7 +2,7 @@
   "name": "geek-txt-reader",
   "displayName": "Geek-Txt-Reader - 状态栏极简阅读器",
   "description": "极简纯净的 VS Code 状态栏隐蔽阅读器，支持平滑连贯翻页、章节检索与老板键伪装",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "Yim-dev",
   "author": {
     "name": "Yim",
@@ -35,47 +35,47 @@
   "contributes": {
     "commands": [
       {
-        "command": "geek-reader.openFile",
-        "title": "Geek Reader: 选择本地文件"
+        "command": "geek-txt-reader.openFile",
+        "title": "Geek-Txt-Reader: 选择本地文件"
       },
       {
-        "command": "geek-reader.pageForward",
-        "title": "Geek Reader: 向前翻页"
+        "command": "geek-txt-reader.pageForward",
+        "title": "Geek-Txt-Reader: 向前翻页"
       },
       {
-        "command": "geek-reader.pageBackward",
-        "title": "Geek Reader: 向后翻页"
+        "command": "geek-txt-reader.pageBackward",
+        "title": "Geek-Txt-Reader: 向后翻页"
       },
       {
-        "command": "geek-reader.toggleBossKey",
-        "title": "Geek Reader: 老板键切换"
+        "command": "geek-txt-reader.toggleBossKey",
+        "title": "Geek-Txt-Reader: 老板键切换"
       },
       {
-        "command": "geek-reader.jumpTo",
-        "title": "Geek Reader: 跳转章节与进度"
+        "command": "geek-txt-reader.jumpTo",
+        "title": "Geek-Txt-Reader: 跳转章节与进度"
       }
     ],
     "keybindings": [
       {
-        "command": "geek-reader.pageBackward",
+        "command": "geek-txt-reader.pageBackward",
         "key": "alt+left",
         "mac": "alt+left",
         "when": "true"
       },
       {
-        "command": "geek-reader.pageForward",
+        "command": "geek-txt-reader.pageForward",
         "key": "alt+right",
         "mac": "alt+right",
         "when": "true"
       },
       {
-        "command": "geek-reader.toggleBossKey",
+        "command": "geek-txt-reader.toggleBossKey",
         "key": "alt+q",
         "mac": "cmd+q",
         "when": "true"
       },
       {
-        "command": "geek-reader.jumpTo",
+        "command": "geek-txt-reader.jumpTo",
         "key": "alt+j",
         "mac": "alt+j",
         "when": "true"
@@ -83,28 +83,28 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "Geek Reader",
+      "title": "Geek Txt Reader",
       "properties": {
-        "geekReader.showTitle": {
+        "geekTxtReader.showTitle": {
           "type": "boolean",
           "default": false,
           "description": "是否在状态栏展示完整章节名。关闭时进入精简模式（仅保留章节序号与字数进度，完整标题转至鼠标悬浮查看），可显著扩大正文可视宽度。"
         },
-        "geekReader.displayLength": {
+        "geekTxtReader.displayLength": {
           "type": "integer",
           "default": 35,
           "minimum": 10,
           "maximum": 500,
           "description": "状态栏提取的字符窗口宽度。精简模式下推荐设为 35~45。"
         },
-        "geekReader.stepLength": {
+        "geekTxtReader.stepLength": {
           "type": "integer",
           "default": 28,
           "minimum": 1,
           "maximum": 500,
           "description": "每次翻页滚动的字符步长。建议略小于 Display Length 以保证首尾平滑搭桥。"
         },
-        "geekReader.bossMaskText": {
+        "geekTxtReader.bossMaskText": {
           "type": "string",
           "default": "",
           "description": "老板键触发时显示的伪装内容（留空则为纯隐藏）"

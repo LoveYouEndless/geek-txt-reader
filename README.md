@@ -1,4 +1,4 @@
-# Geek Reader
+# Geek-Txt-Reader
 
 极简纯净的 VS Code 状态栏隐蔽阅读器。
 
@@ -23,8 +23,8 @@
 
 ## ⚙️ 设置项
 
-可以在 VS Code 设置（`Ctrl + ,`）中搜索 `geekReader` 进行个性化调整：
-- `geekReader.displayLength`：单次展示字数窗口宽度（默认 35）
-- `geekReader.stepLength`：每次按键移动的字数步长（默认 28）
-- `geekReader.showTitle`：是否在状态栏常驻长章节名（默认关闭进入精简模式）
-- `geekReader.bossMaskText`：老板键伪装文本内容
+可以在 VS Code 设置（`Ctrl + ,`）中搜索 `geekTxtReader` 进行个性化调整：
+- `geekTxtReader.displayLength`：单次展示字数窗口宽度（默认 35）
+- `geekTxtReader.stepLength`：每次按键移动的字数步长（默认 28）
+- `geekTxtReader.showTitle`：是否在状态栏常驻长章节名（默认关闭进入精简模式）
+- `geekTxtReader.bossMaskText`：老板键伪装文本内容
