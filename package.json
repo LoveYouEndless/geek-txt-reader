@@ -1,6 +1,6 @@
 {
-  "name": "geek-reader",
-  "displayName": "Geek Reader - 状态栏极简阅读器",
+  "name": "geek-txt-reader",
+  "displayName": "Geek-Txt-Reader - 状态栏极简阅读器",
   "description": "极简纯净的 VS Code 状态栏隐蔽阅读器，支持平滑连贯翻页、章节检索与老板键伪装",
   "version": "1.0.0",
   "publisher": "Yim-dev",
