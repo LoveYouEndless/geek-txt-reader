@@ -1,3 +1,7 @@
+<p align="right">
+  <b>简体中文</b> | <a href="./README_en.md">English</a>
+</p>
+
 # Geek-Txt-Reader
 
 极简纯净的 VS Code 状态栏隐蔽阅读器。
