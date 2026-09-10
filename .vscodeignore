@@ -1,0 +1,4 @@
+.gitignore
+.vscode/**
+jsconfig.json
+*.vsix
