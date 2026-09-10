@@ -8,6 +8,8 @@ A minimalist and stealthy reading extension embedded in the VS Code status bar.
 
 Designed for developers, it maximizes the limited horizontal space of the status bar for a smooth and continuous reading experience without missing characters or abrupt breaks.
 
+Supports VS Code 1.40.0 and later, including current and future 1.x releases.
+
 ## ✨ Features
 
 - 📖 **Smart Encoding & Chapter Splitting**: Automatically detects UTF-8 and GB18030/GBK encoding to eliminate garbled text; supports common web novel chapter splits.

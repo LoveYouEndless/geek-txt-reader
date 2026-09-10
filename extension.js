@@ -1,14 +1,21 @@
 const vscode = require('vscode');
 const fs = require('fs');
+const { TextDecoder: UtilTextDecoder } = require('util');
 
 class NovelParser {
     static decodeBuffer(buffer) {
+        // VS Code versions with older Node runtimes expose TextDecoder via `util`.
+        const Decoder = typeof TextDecoder === 'function' ? TextDecoder : UtilTextDecoder;
+        if (!Decoder) {
+            return buffer.toString('utf-8');
+        }
+
         try {
-            const utf8Decoder = new TextDecoder('utf-8', { fatal: true });
+            const utf8Decoder = new Decoder('utf-8', { fatal: true });
             return utf8Decoder.decode(buffer);
         } catch {
             try {
-                const gbkDecoder = new TextDecoder('gb18030');
+                const gbkDecoder = new Decoder('gb18030');
                 return gbkDecoder.decode(buffer);
             } catch (err) {
                 return buffer.toString('utf-8');
@@ -175,7 +182,7 @@ class GeekReaderApp {
             const title = this.formatChapterTitle(idx, ch.rawTitle);
             const isCurrent = idx === this.currentChapterIndex;
             return {
-                label: `${isCurrent ? '$(arrow-right) ' : ''}${title}`,
+                label: `${isCurrent ? '当前 · ' : ''}${title}`,
                 description: `共 ${ch.content.length} 字`,
                 index: idx
             };

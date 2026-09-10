@@ -2,7 +2,7 @@
   "name": "geek-txt-reader",
   "displayName": "Geek-Txt-Reader - 状态栏极简阅读器",
   "description": "极简纯净的 VS Code 状态栏隐蔽阅读器，支持平滑连贯翻页、章节检索与老板键伪装",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "Yim-dev",
   "author": {
     "name": "Yim",
@@ -23,14 +23,17 @@
   ],
   "icon": "icon.png",
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": "^1.40.0"
   },
   "categories": [
     "Other"
   ],
   "main": "./extension.js",
   "activationEvents": [
-    "onStartupFinished"
+    "*"
+  ],
+  "extensionKind": [
+    "ui"
   ],
   "contributes": {
     "commands": [
